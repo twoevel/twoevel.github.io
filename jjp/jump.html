@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>線路檢測</title>
+    <style>
+        *, *:before, *:after {
+            box-sizing: border-box;
+            outline: none;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            text-align: center;
+            line-height: 1.5;
+        }
+        .lds-ellipsis {
+            display: inline-block;
+            position: relative;
+            width: 40px;
+            height: 10px;
+        }
+        .lds-ellipsis div {
+            position: absolute;
+            top: 2px;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: #000;
+            animation-timing-function: cubic-bezier(0, 1, 1, 0);
+        }
+        .lds-ellipsis div:nth-child(1) {
+            left: 6px;
+            animation: lds-ellipsis1 0.6s infinite;
+        }
+        .lds-ellipsis div:nth-child(2) {
+            left: 6px;
+            animation: lds-ellipsis2 0.6s infinite;
+        }
+        .lds-ellipsis div:nth-child(3) {
+            left: 17px;
+            animation: lds-ellipsis2 0.6s infinite;
+        }
+        .lds-ellipsis div:nth-child(4) {
+            left: 28px;
+            animation: lds-ellipsis3 0.6s infinite;
+        }
+        @keyframes lds-ellipsis1 {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+        @keyframes lds-ellipsis2 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(10px, 0); }
+        }
+        @keyframes lds-ellipsis3 {
+            0% { transform: scale(1); }
+            100% { transform: scale(0); }
+        }
+        @media (max-width: 640px) {
+            html {
+                font-size: 16px;
+            }
+        }
+    </style>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P9V3KKT');</script>
+</head>
+<body>
+    <div id="container">
+        <div class="main-content">
+            <p style="font-size:2rem">线路检测页</p>
+            <p>NETWORK SPEED TEST CENTER</p>
+            <div style="margin-top:30px;">线路测试中<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>将直接前往站点<br>请耐心等候</div>
+        </div>
+    </div>
+    <script>
+        const cookie = {
+            get(name) {
+                var value = "; " + document.cookie;
+                var parts = value.split("; " + name + "=");
+                if (parts.length == 2) return parts.pop().split(";").shift();
+            }
+        }
+
+        console.log(cookie.get('token'))
+
+        function knock(host) {
+
+            var http = new XMLHttpRequest();
+
+            http.open("GET", host, /*async*/true);
+            http.onreadystatechange = function() {
+                if (http.readyState === XMLHttpRequest.DONE && http.status === 200) {
+                    host += '/index.html'
+                    if(token = cookie.get('token'))
+                        host += '?token=' + token;
+                    window.location.href = host;
+                }
+            };
+
+            try {
+                http.send(null);
+            } catch(exception) {
+                // this is expected
+            }
+
+        }
+
+        function main() {
+
+            var targets = [
+                'http://viptv1.xyz'
+            ];
+
+
+            setTimeout(function () {
+                window.location = targets[0]
+            }, 2000);
+        }
+
+        main();
+    </script>
+</body>
+</html>
